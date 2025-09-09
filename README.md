@@ -1,16 +1,32 @@
-# expiry_tracker
+# Expiry Tracker
 
-A new Flutter project.
+A Flutter-based inventory management application designed to help users track product expiry dates and manage stock efficiently.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Track product expiry dates
+- Categorize items
+- Real-time notifications for expiring products
+- Image-based product management
+- User-friendly interface
+- Inventory analytics
 
-A few resources to get you started if this is your first Flutter project:
+## Project Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
+lib/
+├── constant/      # App constants and configurations
+├── screen/        # UI screens
+├── utils/         # Utility functions
+├── widgets/       # Reusable widgets
+└── main.dart      # Entry point
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots & Demo
+
+All screenshots and demo videos are shared in the Google Drive link below:  
+[Demo Link](PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE)
+
+---
+
+<p align="left" style="font-size:small"><i>[Public version of <code>flutter_projects/expiry_tracker</code>]</i></p>
