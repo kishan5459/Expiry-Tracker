@@ -1,0 +1,138 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:expiry_tracker/utils/colors.dart';
+import 'package:expiry_tracker/utils/custom_text_style.dart';
+import 'package:expiry_tracker/screens/add_item_screen.dart';
+import 'package:expiry_tracker/screens/category_screen.dart';
+import 'package:expiry_tracker/screens/home_screen.dart';
+
+class DashBoardScreen extends StatefulWidget {
+  final String userName;
+
+  const DashBoardScreen({super.key, required this.userName});
+
+  @override
+  State<DashBoardScreen> createState() => _DashBoardScreenState();
+}
+
+class _DashBoardScreenState extends State<DashBoardScreen> {
+  int _selectedIndex = 0;
+  late List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [HomeScreen(userName: widget.userName), CategoryScreen()];
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mqHeight = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      body: _screens[_selectedIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddItemScreen()),
+          );
+        },
+        elevation: 0,
+        backgroundColor: AppColors.main,
+        shape: const CircleBorder(),
+        child: const FaIcon(FontAwesomeIcons.plus, color: Colors.white),
+      ),
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      bottomNavigationBar: BottomAppBar(
+        padding: EdgeInsets.zero,
+        notchMargin: mqHeight * 0.01,
+        elevation: 0,
+        height: mqHeight * 0.09,
+        shape: CircularNotchedRectangle(),
+        color: AppColors.light,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GestureDetector(
+              onTap: () => _onItemTapped(0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.home_filled,
+                    color: _selectedIndex == 0 ? Colors.green : Colors.black54,
+                  ),
+                  Text(
+                    "Home",
+                    style: myTextStyle15(
+                      fontColor:
+                          _selectedIndex == 0 ? Colors.green : Colors.black54,
+                      fontWeight:
+                          _selectedIndex == 0
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            /// Empty column to center the FAB label
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text(
+                    "Add Item",
+                    style: myTextStyle15(
+                      fontWeight: FontWeight.bold,
+                      fontColor: Colors.black54,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            GestureDetector(
+              onTap: () => _onItemTapped(1),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(
+                    FontAwesomeIcons.layerGroup,
+                    color: _selectedIndex == 1 ? Colors.green : Colors.black54,
+                  ),
+                  Text(
+                    "Category",
+                    style: myTextStyle15(
+                      fontColor:
+                          _selectedIndex == 1 ? Colors.green : Colors.black54,
+                      fontWeight:
+                          _selectedIndex == 1
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
